@@ -1,0 +1,8 @@
+{
+  "**/*.{json,yaml,md}": "prettier --write",
+  "**/*.ts": [
+    "prettier --write",
+    "eslint --fix --no-error-on-unmatched-pattern",
+    "jest --runInBand --bail --findRelatedTests --passWithNoTests"
+  ]
+}

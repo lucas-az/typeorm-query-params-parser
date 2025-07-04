@@ -1,0 +1,20 @@
+{
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "endOfLine": "lf",
+  "printWidth": 120,
+  "semi": true,
+  "quoteProps": "as-needed",
+  "singleQuote": true,
+  "tabWidth": 2,
+  "useTabs": false,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": "*.{json,yaml,md}",
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
+}
