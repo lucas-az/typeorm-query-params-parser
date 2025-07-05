@@ -37,7 +37,7 @@ export default defineConfig([
         { blankLine: 'always', prev: '*', next: 'return' },
         { blankLine: 'always', prev: ['const', 'let', 'export'], next: '*' },
         { blankLine: 'always', prev: '*', next: ['const', 'let', 'export'] },
-        { blankLine: 'any', prev: ['const', 'let'], next: ['const', 'let'] },
+        { blankLine: 'any', prev: ['const', 'let', 'export'], next: ['const', 'let', 'export'] },
       ],
       'import-helpers/order-imports': [
         'error',

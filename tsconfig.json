@@ -3,7 +3,6 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "dist",
-    "baseUrl": "src",
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
