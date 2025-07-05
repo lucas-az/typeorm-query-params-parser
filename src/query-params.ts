@@ -1,3 +1,5 @@
 export interface QueryParams {
-  [key: string]: unknown;
+  paginate?: boolean;
+  page?: number;
+  limit?: number;
 }
