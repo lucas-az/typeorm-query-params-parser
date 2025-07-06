@@ -18,7 +18,7 @@ describe('PaginationParser', () => {
 
   beforeAll(async () => {
     dataSource = await TestingDataSourceUtils.create({
-      entities: [User],
+      entities: [`${__dirname}/entities/*.ts`],
     });
   });
 
