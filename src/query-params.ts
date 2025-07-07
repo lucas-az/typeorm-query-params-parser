@@ -3,4 +3,5 @@ export interface QueryParams {
   page?: number;
   limit?: number;
   select?: string[];
+  sort?: string[];
 }
