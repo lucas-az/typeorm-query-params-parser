@@ -4,4 +4,5 @@ export interface QueryParams {
   limit?: number;
   select?: string[];
   sort?: string[];
+  relations?: string[];
 }
