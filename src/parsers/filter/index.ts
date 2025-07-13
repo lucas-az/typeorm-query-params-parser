@@ -23,7 +23,7 @@ export class FilterParser<Entity> extends QueryParser<Entity, QueryParams, Filte
 
   private parameterIndex = 0;
 
-  parser(query: QueryParams = {}): void {
+  parse(query: QueryParams = {}): void {
     if (!query.filter) {
       return;
     }

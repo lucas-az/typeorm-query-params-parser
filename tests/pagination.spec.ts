@@ -34,7 +34,7 @@ describe('PaginationParser', () => {
     const parser = getPaginationParser();
     const expected = 'SELECT "user"."id" AS "user_id" FROM "user" "user"';
 
-    parser.parser({ paginate: false });
+    parser.parse({ paginate: false });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -43,7 +43,7 @@ describe('PaginationParser', () => {
     const parser = getPaginationParser();
     const expected = 'SELECT "user"."id" AS "user_id" FROM "user" "user" LIMIT 25 OFFSET 0';
 
-    parser.parser({});
+    parser.parse({});
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -52,7 +52,7 @@ describe('PaginationParser', () => {
     const parser = getPaginationParser();
     const expected = 'SELECT "user"."id" AS "user_id" FROM "user" "user" LIMIT 25 OFFSET 0';
 
-    parser.parser({ paginate: true });
+    parser.parse({ paginate: true });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -61,7 +61,7 @@ describe('PaginationParser', () => {
     const parser = getPaginationParser();
     const expected = 'SELECT "user"."id" AS "user_id" FROM "user" "user" LIMIT 10 OFFSET 20';
 
-    parser.parser({ paginate: true, limit: 10, page: 3 });
+    parser.parse({ paginate: true, limit: 10, page: 3 });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -70,7 +70,7 @@ describe('PaginationParser', () => {
     const parser = getPaginationParser();
     const expected = 'SELECT "user"."id" AS "user_id" FROM "user" "user" LIMIT 25 OFFSET 25';
 
-    parser.parser({ paginate: true, page: 2 });
+    parser.parse({ paginate: true, page: 2 });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -79,7 +79,7 @@ describe('PaginationParser', () => {
     const parser = getPaginationParser();
     const expected = 'SELECT "user"."id" AS "user_id" FROM "user" "user" LIMIT 15 OFFSET 0';
 
-    parser.parser({ paginate: true, limit: 15 });
+    parser.parse({ paginate: true, limit: 15 });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -88,7 +88,7 @@ describe('PaginationParser', () => {
     const parser = getPaginationParser({ defaultLimit: 5, defaultPage: 4 });
     const expected = 'SELECT "user"."id" AS "user_id" FROM "user" "user" LIMIT 5 OFFSET 15';
 
-    parser.parser({ paginate: true });
+    parser.parse({ paginate: true });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -97,7 +97,7 @@ describe('PaginationParser', () => {
     const parser = getPaginationParser();
     const expected = 'SELECT "user"."id" AS "user_id" FROM "user" "user" LIMIT 25 OFFSET 0';
 
-    parser.parser(undefined);
+    parser.parse(undefined);
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });

@@ -7,7 +7,7 @@ const MULTISELECT_TOKEN = '*';
 export class SelectParser<Entity> extends QueryParser<Entity, QueryParams> {
   private readonly selectUtils = new SelectUtils<Entity>(this.selectQueryBuilder);
 
-  parser(query: QueryParams = {}): void {
+  parse(query: QueryParams = {}): void {
     if (!query.select?.length) {
       return;
     }

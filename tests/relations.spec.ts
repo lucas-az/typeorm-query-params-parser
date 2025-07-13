@@ -28,7 +28,7 @@ describe('RelationsParser', () => {
     const expected =
       'SELECT "user"."id" AS "user_id" FROM "user" "user" LEFT JOIN "profile" "profile" ON "profile"."id"="user"."profileId"';
 
-    parser.parser({ relations: ['profile'] });
+    parser.parse({ relations: ['profile'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -37,7 +37,7 @@ describe('RelationsParser', () => {
     const expected =
       'SELECT "user"."id" AS "user_id" FROM "user" "user" LEFT JOIN "profile" "profile" ON "profile"."id"="user"."profileId"';
 
-    parser.parser({ relations: ['user.profile'] });
+    parser.parse({ relations: ['user.profile'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -46,7 +46,7 @@ describe('RelationsParser', () => {
     const expected =
       'SELECT "user"."id" AS "user_id" FROM "user" "user" LEFT JOIN "profile" "profile" ON "profile"."id"="user"."profileId"  LEFT JOIN "image" "photo" ON "photo"."id"="profile"."photoId"';
 
-    parser.parser({ relations: ['profile', 'profile.photo'] });
+    parser.parse({ relations: ['profile', 'profile.photo'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -55,7 +55,7 @@ describe('RelationsParser', () => {
     const expected =
       'SELECT "user"."id" AS "user_id" FROM "user" "user" LEFT JOIN "profile" "profile" ON "profile"."id"="user"."profileId"  LEFT JOIN "image" "photo" ON "photo"."id"="profile"."photoId"';
 
-    parser.parser({ relations: ['user.profile', 'user.profile.photo'] });
+    parser.parse({ relations: ['user.profile', 'user.profile.photo'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -64,7 +64,7 @@ describe('RelationsParser', () => {
     const expected =
       'SELECT "user"."id" AS "user_id" FROM "user" "user" LEFT JOIN "profile" "profile" ON "profile"."id"="user"."profileId"  LEFT JOIN "image" "photo" ON "photo"."id"="profile"."photoId"';
 
-    parser.parser({ relations: ['profile', 'profile.photo'] });
+    parser.parse({ relations: ['profile', 'profile.photo'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -72,7 +72,7 @@ describe('RelationsParser', () => {
   it('should not execute parser if no relations are provided', () => {
     const expected = 'SELECT "user"."id" AS "user_id" FROM "user" "user"';
 
-    parser.parser();
+    parser.parse();
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });

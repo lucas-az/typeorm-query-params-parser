@@ -27,7 +27,7 @@ describe('SelectParser', () => {
   it('should select only specified fields', () => {
     const expected = 'SELECT "user"."id" AS "user_id", "user"."age" AS "user_age" FROM "user" "user"';
 
-    parser.parser({ select: ['id', 'age'] });
+    parser.parse({ select: ['id', 'age'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -35,7 +35,7 @@ describe('SelectParser', () => {
   it('should select fields only specified fields with aliases', () => {
     const expected = 'SELECT "user"."id" AS "user_id", "user"."age" AS "user_age" FROM "user" "user"';
 
-    parser.parser({ select: ['user.id', 'user.age'] });
+    parser.parse({ select: ['user.id', 'user.age'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -43,7 +43,7 @@ describe('SelectParser', () => {
   it('should select one field from duplicated fields', () => {
     const expected = 'SELECT "user"."id" AS "user_id", "user"."age" AS "user_age" FROM "user" "user"';
 
-    parser.parser({ select: ['id', 'age', 'age'] });
+    parser.parse({ select: ['id', 'age', 'age'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -52,7 +52,7 @@ describe('SelectParser', () => {
     const expected =
       'SELECT "user"."id" AS "user_id", "user"."age" AS "user_age", "user"."profileId" AS "user_profileId", "user"."nameFirst" AS "user_nameFirst", "user"."nameLast" AS "user_nameLast" FROM "user" "user"';
 
-    parser.parser({ select: ['*'] });
+    parser.parse({ select: ['*'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -62,7 +62,7 @@ describe('SelectParser', () => {
       'SELECT "user"."id" AS "user_id", "user"."age" AS "user_age", "profile"."id" AS "profile_id", "profile"."gender" AS "profile_gender" FROM "user" "user" LEFT JOIN "profile" "profile" ON "profile"."id"="user"."profileId"';
 
     selectQueryBuilder.leftJoin('user.profile', 'profile');
-    parser.parser({ select: ['id', 'age', 'profile.id', 'profile.gender'] });
+    parser.parse({ select: ['id', 'age', 'profile.id', 'profile.gender'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -72,7 +72,7 @@ describe('SelectParser', () => {
       'SELECT "user"."id" AS "user_id", "user"."age" AS "user_age", "profile"."id" AS "profile_id", "profile"."gender" AS "profile_gender" FROM "user" "user" LEFT JOIN "profile" "profile" ON "profile"."id"="user"."profileId"';
 
     selectQueryBuilder.leftJoin('user.profile', 'profile');
-    parser.parser({ select: ['user.id', 'user.age', 'user.profile.id', 'user.profile.gender'] });
+    parser.parse({ select: ['user.id', 'user.age', 'user.profile.id', 'user.profile.gender'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -82,7 +82,7 @@ describe('SelectParser', () => {
       'SELECT "user"."id" AS "user_id", "user"."age" AS "user_age", "profile"."id" AS "profile_id", "profile"."gender" AS "profile_gender", "profile"."photoId" AS "profile_photoId" FROM "user" "user" LEFT JOIN "profile" "profile" ON "profile"."id"="user"."profileId"';
 
     selectQueryBuilder.leftJoin('user.profile', 'profile');
-    parser.parser({ select: ['id', 'age', 'profile.*'] });
+    parser.parse({ select: ['id', 'age', 'profile.*'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -92,7 +92,7 @@ describe('SelectParser', () => {
       'SELECT "user"."id" AS "user_id", "user"."age" AS "user_age", "profile"."id" AS "profile_id", "photo"."src" AS "photo_src" FROM "user" "user" LEFT JOIN "profile" "profile" ON "profile"."id"="user"."profileId"  LEFT JOIN "image" "photo" ON "photo"."id"="profile"."photoId"';
 
     selectQueryBuilder.leftJoin('user.profile', 'profile').leftJoin('profile.photo', 'photo');
-    parser.parser({ select: ['id', 'age', 'profile.id', 'photo.src'] });
+    parser.parse({ select: ['id', 'age', 'profile.id', 'photo.src'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -102,7 +102,7 @@ describe('SelectParser', () => {
       'SELECT "user"."id" AS "user_id", "user"."age" AS "user_age", "profile"."id" AS "profile_id", "photo"."src" AS "photo_src" FROM "user" "user" LEFT JOIN "profile" "profile" ON "profile"."id"="user"."profileId"  LEFT JOIN "image" "photo" ON "photo"."id"="profile"."photoId"';
 
     selectQueryBuilder.leftJoin('user.profile', 'profile').leftJoin('profile.photo', 'photo');
-    parser.parser({ select: ['id', 'age', 'profile.id', 'profile.photo.src'] });
+    parser.parse({ select: ['id', 'age', 'profile.id', 'profile.photo.src'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -112,7 +112,7 @@ describe('SelectParser', () => {
       'SELECT "user"."id" AS "user_id", "user"."age" AS "user_age", "profile"."id" AS "profile_id", "photo"."id" AS "photo_id", "photo"."src" AS "photo_src", "photo"."alt" AS "photo_alt" FROM "user" "user" LEFT JOIN "profile" "profile" ON "profile"."id"="user"."profileId"  LEFT JOIN "image" "photo" ON "photo"."id"="profile"."photoId"';
 
     selectQueryBuilder.leftJoin('user.profile', 'profile').leftJoin('profile.photo', 'photo');
-    parser.parser({ select: ['id', 'age', 'profile.id', 'photo.*'] });
+    parser.parse({ select: ['id', 'age', 'profile.id', 'photo.*'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -121,7 +121,7 @@ describe('SelectParser', () => {
     const expected =
       'SELECT "user"."nameFirst" AS "user_nameFirst", "user"."nameLast" AS "user_nameLast" FROM "user" "user"';
 
-    parser.parser({ select: ['name.first', 'name.last'] });
+    parser.parse({ select: ['name.first', 'name.last'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -130,7 +130,7 @@ describe('SelectParser', () => {
     const expected =
       'SELECT "user"."nameFirst" AS "user_nameFirst", "user"."nameLast" AS "user_nameLast" FROM "user" "user"';
 
-    parser.parser({ select: ['user.name.first', 'user.name.last'] });
+    parser.parse({ select: ['user.name.first', 'user.name.last'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -139,7 +139,7 @@ describe('SelectParser', () => {
     const expected =
       'SELECT "user"."nameFirst" AS "user_nameFirst", "user"."nameLast" AS "user_nameLast" FROM "user" "user"';
 
-    parser.parser({ select: ['name.*'] });
+    parser.parse({ select: ['name.*'] });
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
@@ -148,7 +148,7 @@ describe('SelectParser', () => {
     const expected =
       'SELECT "user"."id" AS "user_id", "user"."age" AS "user_age", "user"."profileId" AS "user_profileId", "user"."nameFirst" AS "user_nameFirst", "user"."nameLast" AS "user_nameLast" FROM "user" "user"';
 
-    parser.parser();
+    parser.parse();
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });

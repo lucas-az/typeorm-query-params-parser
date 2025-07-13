@@ -14,7 +14,7 @@ const defaultOptions: PaginationParserOptions = {
 };
 
 export class PaginationParser<Entity> extends QueryParser<Entity, QueryParams, PaginationParserOptions> {
-  parser(query: QueryParams = {}): void {
+  parse(query: QueryParams = {}): void {
     if (query.paginate === false) {
       return;
     }

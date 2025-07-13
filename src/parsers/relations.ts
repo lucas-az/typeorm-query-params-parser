@@ -8,7 +8,7 @@ interface Relation {
 }
 
 export class RelationsParser<Entity> extends QueryParser<Entity, QueryParams> {
-  parser(query: QueryParams = {}): void {
+  parse(query: QueryParams = {}): void {
     if (!query.relations?.length) {
       return;
     }

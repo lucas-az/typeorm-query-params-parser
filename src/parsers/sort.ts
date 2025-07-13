@@ -9,7 +9,7 @@ const DESC_START_CHAR = '-';
 export class SortParser<Entity> extends QueryParser<Entity, QueryParams> {
   private readonly selectUtils = new SelectUtils<Entity>(this.selectQueryBuilder);
 
-  parser(query: QueryParams = {}): void {
+  parse(query: QueryParams = {}): void {
     if (!query.sort?.length) {
       return;
     }

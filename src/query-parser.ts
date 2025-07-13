@@ -8,5 +8,5 @@ export abstract class QueryParser<Entity, Query = QueryParams, ParserOptions = R
     public readonly options?: ParserOptions,
   ) {}
 
-  abstract parser(query: Query): void;
+  abstract parse(query: Query): void;
 }

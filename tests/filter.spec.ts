@@ -45,7 +45,7 @@ describe('FilterParser', () => {
       param_16: 38,
     });
 
-    parser.parser({
+    parser.parse({
       filter: {
         name: {
           first: {
@@ -87,7 +87,7 @@ describe('FilterParser', () => {
       param_1: 18,
     };
 
-    parser.parser({
+    parser.parse({
       filter: {
         _or: [
           {
@@ -116,7 +116,7 @@ describe('FilterParser', () => {
       param_1: 18,
     };
 
-    parser.parser({
+    parser.parse({
       filter: {
         _and: [
           {
@@ -147,7 +147,7 @@ describe('FilterParser', () => {
       param_3: 40,
     };
 
-    parser.parser({
+    parser.parse({
       filter: {
         _or: [
           {
@@ -195,7 +195,7 @@ describe('FilterParser', () => {
     };
 
     selectQueryBuilder.leftJoin('user.profile', 'profile');
-    parser.parser({
+    parser.parse({
       filter: {
         _or: [
           {
@@ -226,7 +226,7 @@ describe('FilterParser', () => {
     });
 
     selectQueryBuilder.leftJoin('user.profile', 'profile').leftJoin('profile.photo', 'photo');
-    parser.parser({
+    parser.parse({
       filter: {
         _or: [
           {
@@ -259,7 +259,7 @@ describe('FilterParser', () => {
       param_1: 'last',
     };
 
-    parser.parser({
+    parser.parse({
       filter: {
         name: {
           first: {
@@ -284,7 +284,7 @@ describe('FilterParser', () => {
       param_1: 'last',
     };
 
-    parser.parser({
+    parser.parse({
       filter: {
         'name.first': {
           _eq: 'first',
@@ -302,7 +302,7 @@ describe('FilterParser', () => {
   it('should not execute parser if filter option is not defined', () => {
     const expected = 'SELECT "user"."id" AS "user_id" FROM "user" "user"';
 
-    parser.parser();
+    parser.parse();
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
