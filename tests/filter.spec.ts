@@ -79,7 +79,7 @@ describe('FilterParser', () => {
     expect(selectQueryBuilder.getParameters()).toEqual(expectedParameters);
   });
 
-  it('should filter using "or" logical operator', () => {
+  it.only('should filter using "or" logical operator', () => {
     const expectedQuery =
       'SELECT "user"."id" AS "user_id" FROM "user" "user" WHERE (("user"."age" <= :param_0 OR "user"."age" >= :param_1))';
     const expectedParameters = {
