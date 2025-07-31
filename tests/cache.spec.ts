@@ -24,8 +24,18 @@ describe('CacheParser', () => {
     expect(mockSelectQueryBuilder.cache).toHaveBeenCalledWith(true);
   });
 
+  it('should enable cache if query.cache is string true', () => {
+    parser.parse({ cache: 'true' });
+    expect(mockSelectQueryBuilder.cache).toHaveBeenCalledWith(true);
+  });
+
   it('should disable cache if query.cache is false', () => {
     parser.parse({ cache: false });
+    expect(mockSelectQueryBuilder.cache).toHaveBeenCalledWith(false);
+  });
+
+  it('should disable cache if query.cache is string false', () => {
+    parser.parse({ cache: 'false' });
     expect(mockSelectQueryBuilder.cache).toHaveBeenCalledWith(false);
   });
 
@@ -34,8 +44,19 @@ describe('CacheParser', () => {
     expect(mockSelectQueryBuilder.cache).toHaveBeenCalledWith(5000);
   });
 
+  it('should enables cache and sets expire milliseconds if query.cache is string number', () => {
+    parser.parse({ cache: '5000' });
+    expect(mockSelectQueryBuilder.cache).toHaveBeenCalledWith(5000);
+  });
+
   it('should enacle cache and sets cache id and expire milliseconds if query.cache is an array', () => {
     parser.parse({ cache: ['my-cache-id', 1000] });
+
+    expect(mockSelectQueryBuilder.cache).toHaveBeenCalledWith('my-cache-id', 1000);
+  });
+
+  it('should enacle cache and sets cache id and expire milliseconds if query.cache is an array of string', () => {
+    parser.parse({ cache: ['my-cache-id', '1000'] });
 
     expect(mockSelectQueryBuilder.cache).toHaveBeenCalledWith('my-cache-id', 1000);
   });

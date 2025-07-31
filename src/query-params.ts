@@ -6,6 +6,6 @@ export interface QueryParams {
   sort?: string[];
   relations?: string[];
   filter?: Record<string, unknown>;
-  cache?: boolean | number | [string, number];
+  cache?: boolean | number | string | [string, number | string];
   withDeleted?: boolean | string;
 }
