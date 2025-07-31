@@ -14,4 +14,8 @@ export abstract class TypeUtils {
   static toBoolean(value: unknown) {
     return !['0', 0, 'false', false, ''].includes(value as string | number | boolean);
   }
+
+  static toInt(value: unknown) {
+    return value && Number.parseInt(value.toString(), 10);
+  }
 }

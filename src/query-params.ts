@@ -1,7 +1,7 @@
 export interface QueryParams {
-  paginate?: boolean;
-  page?: number;
-  limit?: number;
+  paginate?: boolean | string;
+  page?: number | string;
+  limit?: number | string;
   select?: string[];
   sort?: string[];
   relations?: string[];

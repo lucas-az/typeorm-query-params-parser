@@ -101,4 +101,24 @@ describe('PaginationParser', () => {
 
     expect(selectQueryBuilder.getQuery()).toEqual(expected);
   });
+
+  it('should not paginate if paginate option is string false', () => {
+    const parser = getPaginationParser();
+    const expected = 'SELECT "user"."id" AS "user_id" FROM "user" "user"';
+
+    parser.parse({
+      paginate: 'false',
+    });
+
+    expect(selectQueryBuilder.getQuery()).toEqual(expected);
+  });
+
+  it('should use provided string limit and page from query', () => {
+    const parser = getPaginationParser();
+    const expected = 'SELECT "user"."id" AS "user_id" FROM "user" "user" LIMIT 10 OFFSET 20';
+
+    parser.parse({ paginate: 'true', limit: '10', page: '3' });
+
+    expect(selectQueryBuilder.getQuery()).toEqual(expected);
+  });
 });

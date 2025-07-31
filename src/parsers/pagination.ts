@@ -1,5 +1,6 @@
 import { QueryParams } from '../query-params';
 import { QueryParser } from '../query-parser';
+import { TypeUtils } from '../utils/type-utils';
 
 export interface PaginationParserOptions {
   /** The default number of items per page if not specified. Defaults to 25. */
@@ -15,13 +16,13 @@ const defaultOptions: PaginationParserOptions = {
 
 export class PaginationParser<Entity> extends QueryParser<Entity, QueryParams, PaginationParserOptions> {
   parse(query: QueryParams = {}): void {
-    if (query.paginate === false) {
+    if (TypeUtils.toBoolean(query.paginate) === false) {
       return;
     }
 
     const options = { ...defaultOptions, ...this.options };
-    const limit = query.limit || options.defaultLimit;
-    const page = query.page || options.defaultPage;
+    const limit = TypeUtils.toInt(query.limit) || options.defaultLimit;
+    const page = TypeUtils.toInt(query.page) || options.defaultPage;
     const skip = limit * (page - 1);
     const take = limit;
 
