@@ -19,8 +19,18 @@ describe('WithDeletedParser', () => {
     expect(mockSelectQueryBuilder.withDeleted).toHaveBeenCalled();
   });
 
+  it('should call withDeleted when query.withDeleted is string true', () => {
+    parser.parse({ withDeleted: 'true' });
+    expect(mockSelectQueryBuilder.withDeleted).toHaveBeenCalled();
+  });
+
   it('should not call withDeleted when query.withDeleted is false', () => {
     parser.parse({ withDeleted: false });
+    expect(mockSelectQueryBuilder.withDeleted).not.toHaveBeenCalled();
+  });
+
+  it('should not call withDeleted when query.withDeleted is string false', () => {
+    parser.parse({ withDeleted: 'false' });
     expect(mockSelectQueryBuilder.withDeleted).not.toHaveBeenCalled();
   });
 

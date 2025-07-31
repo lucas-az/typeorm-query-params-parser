@@ -7,5 +7,5 @@ export interface QueryParams {
   relations?: string[];
   filter?: Record<string, unknown>;
   cache?: boolean | number | [string, number];
-  withDeleted?: boolean;
+  withDeleted?: boolean | string;
 }
