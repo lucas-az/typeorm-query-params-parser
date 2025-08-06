@@ -12,8 +12,10 @@
     "url": "git+https://github.com/lucas-az/typeorm-query-params-parser.git"
   },
   "keywords": [],
-  "author": "Lucas A. da Silva",
-  "license": "ISC",
+  "author": {
+    "name": "Lucas Azevedo da Silva"
+  },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/lucas-az/typeorm-query-params-parser/issues"
   },
