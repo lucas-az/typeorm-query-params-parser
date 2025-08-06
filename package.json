@@ -11,7 +11,14 @@
     "type": "git",
     "url": "git+https://github.com/lucas-az/typeorm-query-params-parser.git"
   },
-  "keywords": [],
+  "keywords": [
+    "typeorm",
+    "query",
+    "params",
+    "parser",
+    "query-builder",
+    "typescript"
+  ],
   "author": {
     "name": "Lucas Azevedo da Silva"
   },
