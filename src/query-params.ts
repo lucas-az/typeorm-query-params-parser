@@ -1,3 +1,5 @@
+import { FilterParam } from './parsers/filter/types';
+
 export interface QueryParams {
   paginate?: boolean | string;
   page?: number | string;
@@ -5,7 +7,7 @@ export interface QueryParams {
   select?: string[];
   sort?: string[];
   relations?: string[];
-  filter?: Record<string, unknown>;
+  filter?: FilterParam;
   cache?: boolean | number | string | [string, number | string];
   withDeleted?: boolean | string;
 }

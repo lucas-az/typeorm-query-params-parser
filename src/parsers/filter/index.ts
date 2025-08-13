@@ -6,7 +6,7 @@ import { QueryParser } from '../../query-parser';
 import { SelectUtils } from '../../utils';
 import { TypeUtils } from '../../utils/type-utils';
 import { filterOperators, logicalOperators } from './operators';
-import { FilterOperators, LogicalMethod, LogicalOperators } from './types';
+import { FilterParam, FilterOperators, LogicalMethod, LogicalOperators } from './types';
 
 export interface FilterParserOptions {
   filterOperators?: FilterOperators;
@@ -37,12 +37,12 @@ export class FilterParser<Entity> extends QueryParser<Entity, QueryParams, Filte
 
   private buildFilter(
     builder: WhereExpressionBuilder,
-    filter: QueryParams['filter'],
+    filter: FilterParam,
     fieldPath: string,
     logical: LogicalMethod = 'andWhere',
   ) {
-    Object.keys(filter).forEach((key) => {
-      const value = filter[key];
+    Object.keys(filter).forEach((key: keyof FilterParam) => {
+      const value = filter[key] as unknown;
       const isDefined = TypeUtils.isDefined(value);
       const isArray = TypeUtils.isArray(value);
       const isObject = TypeUtils.isObject(value);
@@ -76,7 +76,7 @@ export class FilterParser<Entity> extends QueryParser<Entity, QueryParams, Filte
         return;
       }
 
-      this.buildFilter(builder, value as Record<string, unknown>, this.makeFieldPath(fieldPath, key), logical);
+      this.buildFilter(builder, value as FilterParam, this.makeFieldPath(fieldPath, key), logical);
     });
   }
 
